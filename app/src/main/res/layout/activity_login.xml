@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1541B1"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header: Settings -->
+        <TextView
+            android:id="@+id/textViewLoginHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Login Button -->
+        <TextView
+            android:id="@+id/textViewUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_horizontal"
+            android:visibility="gone" />
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOG IN"
+            android:backgroundTint="#6200EE"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Login Information -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login information"
+            android:drawableLeft="@drawable/key_109129"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- My Notifications -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Notifications"
+            android:drawableLeft="@drawable/bell_2550853"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Recover Purchases -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recover purchases"
+            android:drawableLeft="@drawable/shopping_cart_1340430"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- App Interface Language -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="App interface language"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Dark Mode Toggle -->
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dark Mode"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="24dp"
+            android:thumbTint="#FFFFFF"
+            android:trackTint="#6525BD"/>
+
+    </LinearLayout>
+</ScrollView>
+
+

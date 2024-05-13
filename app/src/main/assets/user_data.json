@@ -1,0 +1,13 @@
+{
+  "user": {
+    "id": "123456",
+    "name": "Иван Иванов",
+    "email": "ivanov@example.com",
+    "phone": "+77771234567",
+    "profile_picture": "url_to_picture",
+    "settings": {
+      "language": "ru",
+      "notifications": true
+    }
+  }
+}

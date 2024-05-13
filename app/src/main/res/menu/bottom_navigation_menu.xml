@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_main"
+        android:icon="@android:drawable/ic_media_ff"
+        android:title="Main"
+        app:showAsAction="ifRoom" />
+
+
+    <item
+        android:id="@+id/navigation_reader"
+        android:icon="@android:drawable/presence_audio_online"
+        android:title="Reader"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/navigation_my_books"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="My Books"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/navigation_login"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Log in"
+        app:showAsAction="ifRoom" />
+
+
+</menu>

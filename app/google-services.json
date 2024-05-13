@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "580544631854",
+    "project_id": "booksale-7af20",
+    "storage_bucket": "booksale-7af20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580544631854:android:7eaba29ae76b0b9e8f7bbf",
+        "android_client_info": {
+          "package_name": "com.example.boook_sale"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwoanDRbPZJEuRbqqFFdyPit518NIpHuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

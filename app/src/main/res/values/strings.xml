@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Boook_sale</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="login">Log In</string>
+    <string name="register">Register</string>
+    <string name="welcome_message">Добро пожаловать!</string>
+    <string name="logo">Logo</string>
+    <string name="default_web_client_id">your_web_client_id_from_firebase</string>
+</resources>
