@@ -21,6 +21,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.boook_sale.Adapters.BookAdapter;
+import com.example.boook_sale.Adapters.RandomBookAdapter;
+import com.example.boook_sale.DB.Book;
+import com.example.boook_sale.DB.BookClient;
+import com.example.boook_sale.Users_auth.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -68,9 +73,7 @@ public class MainActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_main) {
                 startActivity(new Intent(this, MainActivity.class));
-            }  else if (itemId == R.id.navigation_reader) {
-                startActivity(new Intent(this, ReaderActivity.class));
-            } else if (itemId == R.id.navigation_my_books) {
+            }  else if (itemId == R.id.navigation_my_books) {
                 startActivity(new Intent(this, MyBooksActivity.class));
             } else if (itemId == R.id.navigation_login) {
                 startActivity(new Intent(this, LoginActivity.class));
@@ -155,62 +158,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.action_share) {
-            setShareIntent();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    private void setShareIntent() {
-        ImageView ivImage = (ImageView) findViewById(R.id.ivBookCover);
-        final TextView tvTitle = (TextView)findViewById(R.id.tvTitle);
-        // Get access to the URI for the bitmap
-        Uri bmpUri = getLocalBitmapUri(ivImage);
-        // Construct a ShareIntent with link to image
-        Intent shareIntent = new Intent();
-        // Construct a ShareIntent with link to image
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.setType("*/*");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, (String)tvTitle.getText());
-        shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-        // Launch share menu
-        startActivity(Intent.createChooser(shareIntent, "Share Image"));
-    }
-
-    // Returns the URI path to the Bitmap displayed in cover imageview
-    public Uri getLocalBitmapUri(ImageView imageView) {
-        // Extract Bitmap from ImageView drawable
-        Drawable drawable = imageView.getDrawable();
-        Bitmap bmp = null;
-        if (drawable instanceof BitmapDrawable){
-            bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        } else {
-            return null;
-        }
-        // Store image to default external storage directory
-        Uri bmpUri = null;
-        try {
-            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                    "share_image_" + System.currentTimeMillis() + ".png");
-            file.getParentFile().mkdirs();
-            FileOutputStream out = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
-            out.close();
-            bmpUri = Uri.fromFile(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bmpUri;
     }
 }

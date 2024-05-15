@@ -1,30 +1,26 @@
 package com.example.boook_sale.DB;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
-public class User {
-    public String username;
-    public String email;
-    public Map<String, Boolean> books = new HashMap<>();
+public class User implements Serializable {
+    private String userId;
+    private String email;
 
     public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+        // Пустой конструктор необходим для Firestore
     }
 
-    public User(String username, String email) {
-        this.username = username;
+    public User(String userId, String email) {
+        this.userId = userId;
         this.email = email;
     }
 
-    // Геттеры и сеттеры
-
-    public String getUsername() {
-        return username;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -34,14 +30,4 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public Map<String, Boolean> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Map<String, Boolean> books) {
-        this.books = books;
-    }
-
-
 }

@@ -1,34 +1,50 @@
 package com.example.boook_sale;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.boook_sale.Adapters.MyBooksAdapter;
+import com.example.boook_sale.DB.Book;
+import com.example.boook_sale.Users_auth.LoginActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class MyBooksActivity extends AppCompatActivity {
-    private ListView listView;
-    private ArrayAdapter<Book> adapter;
-    private List<Book> myBooks;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private RecyclerView recyclerView;
+    private MyBooksAdapter adapter;
+    private HashSet<Book> myBooksSet = new HashSet<>(); // Используем HashSet для исключения повторений
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_books);
 
-        listView = findViewById(R.id.listViewMyBooks);
-        myBooks = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, myBooks);
-        listView.setAdapter(adapter);
+        recyclerView = findViewById(R.id.recyclerViewMyBooks);
+        adapter = new MyBooksAdapter(new ArrayList<>(myBooksSet), this::onBookClick);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        BottomNavigationView navView = findViewById(R.id.bottom_navigation);
+        navView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.navigation_main) {
+                startActivity(new Intent(this, MainActivity.class));
+            }   else if (itemId == R.id.navigation_my_books) {
+                startActivity(new Intent(this, MyBooksActivity.class));
+            } else if (itemId == R.id.navigation_login) {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
+            return true;
+        });
 
         loadMyBooks();
     }
@@ -36,24 +52,28 @@ public class MyBooksActivity extends AppCompatActivity {
     private void loadMyBooks() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            db.collection("Users").document(user.getUid()).collection("MyBooks")
+            FirebaseFirestore.getInstance().collection("Users").document(user.getUid()).collection("MyBooks")
                     .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Book book = document.toObject(Book.class);
-                                myBooks.add(book);
-                            }
-                            adapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(this, "Error loading books: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Book book = document.toObject(Book.class);
+                            myBooksSet.add(book); // Добавляем книгу в HashSet
                         }
-                    });
+                        adapter.updateBooks(new ArrayList<>(myBooksSet)); // Обновляем адаптер новым списком
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(MyBooksActivity.this, "Error loading books: " + e.getMessage(), Toast.LENGTH_LONG).show());
         } else {
-            Toast.makeText(this, "Please log in to view your books", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "You need to be logged in to view your books", Toast.LENGTH_LONG).show();
         }
     }
+
+    private void onBookClick(Book book) {
+        Intent intent = new Intent(this, BookDetailActivity.class);
+        intent.putExtra(BookDetailActivity.BOOK_DETAIL_KEY, book);
+        startActivity(intent);
+    }
 }
+
 
 
 

@@ -10,12 +10,6 @@
 
 
     <item
-        android:id="@+id/navigation_reader"
-        android:icon="@android:drawable/presence_audio_online"
-        android:title="Reader"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/navigation_my_books"
         android:icon="@android:drawable/ic_menu_agenda"
         android:title="My Books"
